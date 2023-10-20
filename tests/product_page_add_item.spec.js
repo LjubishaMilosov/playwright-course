@@ -21,9 +21,6 @@ await expect(basketCounter).toHaveText("1")
 
 //    console.log(await page.getByRole('button', {name: 'Add To Basket' }).count())
 
-await page.pause()
-
-
 
 })
 
