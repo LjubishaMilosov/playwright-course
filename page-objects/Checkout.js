@@ -20,20 +20,15 @@ removeCheapestProduct = async () =>
     const itemsBeforeRemoval = await this.basketCards.count()
     await this.basketItemPrice.first().waitFor()
     const allPriceTexts = await this.basketItemPrice.allInnerTexts()
-
     // map executes a function on all elements, it converts one list to another
-
     const justNumbers = allPriceTexts.map((element) =>
     {
         const withoutDollarSign = element.replace("$", "")
         return parseInt(withoutDollarSign, 10)
         console.warn({element})
-
     })
-    
     // await this.page.pause()
-
-    const smalletPrice = Math.min(justNumbers)
+    const smalletPrice = Math.min(...justNumbers)
     const smallestPriceIdx = justNumbers.indexOf(smalletPrice)
     const specificRemoveButton = this.basketItemRemoveButton.nth(smallestPriceIdx)
     await specificRemoveButton.waitFor()
